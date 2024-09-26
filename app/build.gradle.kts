@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.serialization.gradle.plugin)
+    alias(libs.plugins.ksp.gradle.plugin)
+    alias(libs.plugins.hilt.android.gradle.plugin)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -50,20 +54,55 @@ android {
 }
 
 dependencies {
-
+    //Core Ktx
     implementation(libs.androidx.core.ktx)
+
+    //Lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    //Compose
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+
+    //Material3
     implementation(libs.androidx.material3)
+
+    //Hilt
+    implementation(libs.hilt.dependency.injection)
+    ksp(libs.hilt.android.compiler)
+
+    //Navigation
+    implementation(libs.navigation)
+    implementation(libs.hilt.navigation.compose)
+
+    //Datastore
+    implementation(libs.datastore.preferences)
+    implementation(libs.datastore.preferences.core)
+
+    //Coil
+    implementation(libs.coil.compose)
+
+    //Serialization
+    implementation(libs.kotlin.serialization.json)
+
+    //Splash Screen
+    implementation(libs.splash.screen)
+
+    //Retro
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
+    //Compose Test
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
